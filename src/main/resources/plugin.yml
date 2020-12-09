@@ -1,6 +1,7 @@
 load: STARTUP
-
 main: com.zp4rker.bukkot.Bukkot
+api-version: 1.13
+
 name: Bukkot
 version: ${version}
 description: Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin.
