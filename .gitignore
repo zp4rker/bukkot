@@ -1,0 +1,10 @@
+# global #
+.DS_Store
+.idea/
+*.iml
+target/
+build/
+.gradle/
+gradle/
+gradlew.bat
+gradlew
