@@ -1,0 +1,8 @@
+load: STARTUP
+
+main: com.zp4rker.bukkot.Bukkot
+name: Bukkot
+version: ${version}
+description: Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin.
+author: zp4rker
+website: https://github.com/zp4rker/bukkot

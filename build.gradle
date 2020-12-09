@@ -1,0 +1,41 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.20'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+group 'com.zp4rker'
+version '1.4.20.1-release'
+
+repositories {
+    mavenCentral()
+    maven { url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+}
+
+dependencies {
+    shadow "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    compile "org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = 1.8
+}
+
+shadowJar {
+    archiveClassifier.set("")
+
+    configurations = [project.configurations.shadow]
+
+    dependencies {
+        exclude(dependency { !project.configurations.shadow.allDependencies.any { d -> it.moduleGroup == d.group && it.moduleName == d.name } })
+    }
+}
+
+processResources {
+    filesMatching("**plugin.yml") {
+        expand("version": project.property("version"))
+    }
+}
+
+build.dependsOn "shadowJar"
+build.dependsOn "processResources"
