@@ -13,12 +13,11 @@ repositories {
 }
 
 dependencies {
-    shadow "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    shadow "org.jetbrains.kotlin:kotlin-stdlib"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    shadow "org.bstats:bstats-bukkit:1.7"
+    compile "org.bstats:bstats-bukkit:1.7"
 
-    compile "org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT"
+    shadow "org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT"
 }
 
 compileKotlin {
@@ -27,12 +26,6 @@ compileKotlin {
 
 shadowJar {
     archiveClassifier.set("")
-
-    configurations = [project.configurations.shadow]
-
-    dependencies {
-        exclude(dependency { !project.configurations.shadow.allDependencies.any { d -> it.moduleGroup == d.group && it.moduleName == d.name } })
-    }
 
     relocate "org.bstats", "com.zp4rker.bukkot.bstats"
 }
