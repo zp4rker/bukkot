@@ -1,4 +1,4 @@
-<div style="text-align: center;" align="center">
+<div align="center">
 
 ![Logo](https://i.imgur.com/YnVO61v.png)
 
@@ -13,3 +13,14 @@
 Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin.
 
 </div>
+
+# Features
+
+- Item(stack) builder
+- New way(s) to register listeners
+    - Plus register listeners on specific subjects/entities
+- Ease of access to BukkitScheduler
+- `TimeUnit.X.toTicks(...)` and `TickTimeUnit`
+- Custom YAML files using `YamlFile`
+- Various extension functions such as `String#colorify()`
+- `spigot.yml` available as a `YamlConfiguration`

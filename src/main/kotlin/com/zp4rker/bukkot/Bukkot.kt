@@ -9,7 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin
 class Bukkot : JavaPlugin() {
 
     override fun onEnable() {
-        initMetrics()
+        initMetrics().let {
+            if (it.isEnabled) logger.info("Metrics is enabled.")
+        }
     }
 
     private fun initMetrics() = Metrics(this, 9605)
