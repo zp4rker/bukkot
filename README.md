@@ -14,6 +14,24 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 
 </div>
 
+# Download
+
+## Maven
+
+```xml
+<dependency>
+  <groupId>com.zp4rker</groupId>
+  <artifactId>bukkot</artifactId>
+  <version>1.4.20.2-release</version>
+</dependency>
+```
+
+## Gradle
+
+```groovy
+compile "com.zp4rker:bukkot:1.4.20.2-release"
+```
+
 # Features
 
 - Item(stack) builder
