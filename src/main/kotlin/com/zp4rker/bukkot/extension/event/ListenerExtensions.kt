@@ -1,6 +1,6 @@
 package com.zp4rker.bukkot.extension.event
 
-import com.zp4rker.bukkot.extension.PLUGIN_MANAGER
+import com.zp4rker.bukkot.extension.PMANAGER
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.event.HandlerList
@@ -86,11 +86,11 @@ inline fun <reified T : Event> Listener.register(
     ignoreCancelled: Boolean = false,
     noinline executor: (Listener, Event) -> Unit
 ) {
-    PLUGIN_MANAGER.registerEvent(T::class.java, this, priority, executor, plugin, ignoreCancelled)
+    PMANAGER.registerEvent(T::class.java, this, priority, executor, plugin, ignoreCancelled)
 }
 
 fun Listener.register(plugin: Plugin) {
-    PLUGIN_MANAGER.registerEvents(this, plugin)
+    PMANAGER.registerEvents(this, plugin)
 }
 
 fun Listener.unregister() {

@@ -15,7 +15,7 @@ fun item(type: Material, data: ItemStack.() -> Unit) = ItemStack(type).apply(dat
 
 fun item(base: ItemStack, data: ItemStack.() -> Unit) = ItemStack(base).apply(data)
 
-fun <T: ItemMeta> ItemStack.meta(data: T.() -> Unit) {
+fun <T : ItemMeta> ItemStack.meta(data: T.() -> Unit) {
     val meta = itemMeta(type, data)
     itemMeta = meta
 }
@@ -28,19 +28,27 @@ fun <T : ItemMeta> itemMeta(type: Material, data: T.() -> Unit) = Bukkit.getItem
 
 var ItemMeta.fullLore: String?
     get() = lore?.joinToString("\n")
-    set(value) { lore = value?.split("\n") }
+    set(value) {
+        lore = value?.split("\n")
+    }
 
 var ItemMeta.name: String?
     get() = if (hasDisplayName()) displayName else null
-    set(value) { setDisplayName(value) }
+    set(value) {
+        setDisplayName(value)
+    }
 
 var ItemMeta.modelData: Int?
     get() = if (hasCustomModelData()) customModelData else null
-    set(value) { setCustomModelData(value) }
+    set(value) {
+        setCustomModelData(value)
+    }
 
 var ItemMeta.unbreakable: Boolean
     get() = isUnbreakable
-    set(value) { isUnbreakable = value }
+    set(value) {
+        isUnbreakable = value
+    }
 
 fun ItemMeta.flag(vararg flags: ItemFlag) = addItemFlags(*flags)
 
