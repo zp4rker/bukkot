@@ -33,7 +33,8 @@ import org.bukkit.plugin.Plugin
 object SubjectRegistry {
 
 
-    private data class Entry<T: Event>(val type: Class<T>, val subject: (T) -> Set<Any?>)
+    private data class Entry<T : Event>(val type: Class<T>, val subject: (T) -> Set<Any?>)
+
     private val registry: MutableSet<Entry<out Event>> = mutableSetOf()
 
     init {
@@ -154,10 +155,10 @@ object SubjectRegistry {
         add(TabCompleteEvent::class.java) { setOf(it.sender) }
     }
 
-    private fun <T: Event> add(type: Class<T>, subject: (T) -> Set<Any?>) = registry.add(Entry(type, subject))
+    private fun <T : Event> add(type: Class<T>, subject: (T) -> Set<Any?>) = registry.add(Entry(type, subject))
 
     @Suppress("UNCHECKED_CAST")
-    fun <T: Event> find(type: Class<T>): List<(T) -> Set<Any?>> {
+    fun <T : Event> find(type: Class<T>): List<(T) -> Set<Any?>> {
         return registry.filter { it.type.isAssignableFrom(type) }
             .map { it.subject as (T) -> Set<Any?> }
             .toList()
@@ -176,6 +177,25 @@ inline fun <reified T : Event> Any.on(
     Validate.isTrue(subjects.isNotEmpty(), "Event ${T::class.java.name} is not available")
     return plugin.on(priority, ignoreCancelled) {
         if (subjects.any { s -> this@on in s(it) }) {
+            action(it)
+        }
+    }
+}
+
+inline fun <reified T : Event> Any.expect(
+    crossinline predicate: Predicate<T> = { true },
+    amount: Int = 1,
+    timeout: Long = 0,
+    crossinline timeoutAction: () -> Unit = {},
+    plugin: Plugin,
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: Listener.(T) -> Unit
+): ExtendedListener<T> {
+    val subjects = SubjectRegistry.find(T::class.java)
+    Validate.isTrue(subjects.isNotEmpty(), "Event ${T::class.java.name} is not available")
+    return plugin.expect(predicate, amount, timeout, timeoutAction, priority, ignoreCancelled) {
+        if (subjects.any { s -> this@expect in s(it) }) {
             action(it)
         }
     }
