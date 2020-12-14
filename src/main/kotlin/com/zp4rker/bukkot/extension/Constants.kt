@@ -8,5 +8,5 @@ import org.bukkit.plugin.PluginManager
  * @author zp4rker
  */
 
-val PLUGIN_MANAGER: PluginManager get() = Bukkit.getPluginManager()
-val SERVER: Server get() = Bukkit.getServer()
+object PLUGIN_MANAGER: PluginManager by Bukkit.getPluginManager()
+object SERVER: Server by Bukkit.getServer()
