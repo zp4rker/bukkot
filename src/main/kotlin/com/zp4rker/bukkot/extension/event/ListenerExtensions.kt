@@ -24,7 +24,7 @@ interface ExtendedListener<in T : Event> : Listener {
 
 inline fun <reified T : Event> listener(crossinline action: Listener.(T) -> Unit) = object : ExtendedListener<T> {
     override fun onEvent(event: T) {
-        if (event is T) action(event)
+        action(event)
     }
 }
 
@@ -97,6 +97,7 @@ fun Listener.unregister() {
     HandlerList.unregisterAll(this)
 }
 
+@Suppress("UNCHECKED_CAST")
 inline fun <reified T : Event> ExtendedListener<T>.register(
     plugin: Plugin,
     priority: EventPriority = EventPriority.NORMAL,

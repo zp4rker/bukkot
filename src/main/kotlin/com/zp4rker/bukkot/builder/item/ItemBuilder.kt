@@ -20,6 +20,7 @@ fun <T: ItemMeta> ItemStack.meta(data: T.() -> Unit) {
     itemMeta = meta
 }
 
+@Suppress("UNCHECKED_CAST")
 fun <T : ItemMeta> itemMeta(type: Material, data: T.() -> Unit) = Bukkit.getItemFactory().getItemMeta(type)
     .let { it as? T }
     ?.apply(data)
