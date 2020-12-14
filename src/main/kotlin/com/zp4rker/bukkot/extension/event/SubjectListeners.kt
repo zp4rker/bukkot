@@ -1,6 +1,10 @@
 package com.zp4rker.bukkot.extension.event
 
+import org.apache.commons.lang.Validate
+import org.bukkit.block.BlockState
 import org.bukkit.event.Event
+import org.bukkit.event.EventPriority
+import org.bukkit.event.Listener
 import org.bukkit.event.block.*
 import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.enchantment.PrepareItemEnchantEvent
@@ -16,6 +20,11 @@ import org.bukkit.event.server.ServerCommandEvent
 import org.bukkit.event.server.TabCompleteEvent
 import org.bukkit.event.vehicle.*
 import org.bukkit.event.weather.WeatherEvent
+import org.bukkit.event.world.LootGenerateEvent
+import org.bukkit.event.world.PortalCreateEvent
+import org.bukkit.event.world.StructureGrowEvent
+import org.bukkit.event.world.WorldEvent
+import org.bukkit.plugin.Plugin
 
 /**
  * @author zp4rker
@@ -132,7 +141,11 @@ object SubjectRegistry {
         /* not implementing for now */
 
         /* World Events */
+        add(LootGenerateEvent::class.java) { setOf(it.entity) + it.loot }
+        add(PortalCreateEvent::class.java) { setOf(it.entity) + it.blocks.map(BlockState::getBlock) }
+        add(StructureGrowEvent::class.java) { setOf(it.player) + it.blocks.map(BlockState::getBlock) }
         add(WeatherEvent::class.java) { setOf(it.world) }
+        add(WorldEvent::class.java) { setOf(it.world) }
 
         /* Server Events */
         add(BroadcastMessageEvent::class.java) { it.recipients.toSet() }
@@ -142,4 +155,28 @@ object SubjectRegistry {
     }
 
     private fun <T: Event> add(type: Class<T>, subject: (T) -> Set<Any?>) = registry.add(Entry(type, subject))
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T: Event> find(type: Class<T>): List<(T) -> Set<Any?>> {
+        return registry.filter { it.type.isAssignableFrom(type) }
+            .map { it.subject as (T) -> Set<Any?> }
+            .toList()
+    }
+
+
+}
+
+inline fun <reified T : Event> Any.on(
+    plugin: Plugin,
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: Listener.(T) -> Unit
+): ExtendedListener<T> {
+    val subjects = SubjectRegistry.find(T::class.java)
+    Validate.isTrue(subjects.isNotEmpty(), "Event ${T::class.java.name} is not available")
+    return plugin.on(priority, ignoreCancelled) {
+        if (subjects.any { s -> this@on in s(it) }) {
+            action(it)
+        }
+    }
 }
