@@ -22,14 +22,14 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 <dependency>
     <groupId>com.zp4rker</groupId>
     <artifactId>bukkot</artifactId>
-    <version>1.4.20.2-release</version>
+    <version>1.0.0-k1.5.0</version>
 </dependency>
 ```
 
 **Gradle**
 
 ```groovy
-compile "com.zp4rker:bukkot:1.4.20.2-release"
+compile "com.zp4rker:bukkot:1.0.0-k1.5.0"
 ```
 
 # Features
