@@ -22,14 +22,14 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 <dependency>
     <groupId>com.zp4rker</groupId>
     <artifactId>bukkot</artifactId>
-    <version>1.0.0-k1.5.0</version>
+    <version>1.1.0-k1.5.0</version>
 </dependency>
 ```
 
 **Gradle**
 
 ```groovy
-compile "com.zp4rker:bukkot:1.0.0-k1.5.0"
+compile "com.zp4rker:bukkot:1.1.0-k1.5.0"
 ```
 
 # Features
@@ -42,3 +42,4 @@ compile "com.zp4rker:bukkot:1.0.0-k1.5.0"
 - Custom YAML files using `YamlFile`
 - Various extension functions such as `String#colorify()`
 - `spigot.yml` available as a `YamlConfiguration`
+- As of `v1.1.0`, Kotlin reflect and coroutines are also included

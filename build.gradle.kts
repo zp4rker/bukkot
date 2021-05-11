@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.zp4rker"
-version = "1.0.0-k1.5.0"
+version = "1.1.0-k1.5.0"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-RC")
     implementation("org.bstats:bstats-bukkit:1.7")
     shadow("org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT")
 }
