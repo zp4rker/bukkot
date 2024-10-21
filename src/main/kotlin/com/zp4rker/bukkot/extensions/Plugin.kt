@@ -7,9 +7,6 @@ import org.bukkit.scheduler.BukkitTask
 /**
  * @author zp4rker
  */
-val Plugin.manager
-    get() = server.pluginManager
-
 fun Plugin.runTask(delay: Long = 0, async: Boolean = false, task: BukkitRunnable.() -> Unit): BukkitTask {
     return if (delay > 0) {
         if (async) {

@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin
  * @author zp4rker
  */
 fun Listener.register(plugin: JavaPlugin) {
-    plugin.manager.registerEvents(this, plugin)
+    PMANAGER.registerEvents(this, plugin)
 }
 
 fun Listener.unregister() {

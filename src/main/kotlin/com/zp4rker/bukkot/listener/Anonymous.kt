@@ -1,6 +1,6 @@
 package com.zp4rker.bukkot.listener
 
-import com.zp4rker.bukkot.extensions.manager
+import com.zp4rker.bukkot.extensions.PMANAGER
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -25,5 +25,5 @@ inline fun <reified T : Event> AnonymousListener<T>.register(
 ) {
     @Suppress("UNCHECKED_CAST")
     val executor = EventExecutor { listener, event -> (listener as AnonymousListener<T>).onEvent(event as T) }
-    plugin.manager.registerEvent(T::class.java, this, priority, executor, plugin, ignoreCancelled)
+    PMANAGER.registerEvent(T::class.java, this, priority, executor, plugin, ignoreCancelled)
 }
