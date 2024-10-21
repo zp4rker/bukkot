@@ -1,9 +1,14 @@
 load: STARTUP
 main: com.zp4rker.bukkot.Bukkot
-api-version: 1.13
+api-version: ${mcVersion}
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:2.0.21
+  - org.jetbrains.kotlin:kotlin-reflect:2.0.21
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0
+  - org.bstats:bstats-bukkit:1.7
 
 name: Bukkot
 version: ${version}
-description: Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin.
+description: ${description}
 author: zp4rker
 website: https://github.com/zp4rker/bukkot

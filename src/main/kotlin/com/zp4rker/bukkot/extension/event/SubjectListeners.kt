@@ -80,7 +80,7 @@ object SubjectRegistry {
         add(PigZombieAngerEvent::class.java) { setOf(it.target) }
         add(ProjectileHitEvent::class.java) { setOf(it.hitBlock, it.entity.shooter) }
         add(ProjectileLaunchEvent::class.java) { setOf(it.entity.shooter) }
-        add(SpawnerSpawnEvent::class.java) { setOf(it.spawner.block) }
+        add(SpawnerSpawnEvent::class.java) { setOf(it.spawner!!.block) }
         add(HangingBreakByEntityEvent::class.java) { setOf(it.remover) }
         add(HangingEvent::class.java) { setOf(it.entity) }
         add(HangingPlaceEvent::class.java) { setOf(it.block, it.player) }
