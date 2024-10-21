@@ -1,6 +1,5 @@
 package com.zp4rker.bukkot.extension.event
 
-import org.apache.commons.lang.Validate
 import org.bukkit.block.BlockState
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
@@ -25,6 +24,7 @@ import org.bukkit.event.world.PortalCreateEvent
 import org.bukkit.event.world.StructureGrowEvent
 import org.bukkit.event.world.WorldEvent
 import org.bukkit.plugin.Plugin
+import java.lang.IllegalArgumentException
 
 /**
  * @author zp4rker
@@ -167,14 +167,14 @@ object SubjectRegistry {
 
 }
 
-inline fun <reified T : Event> Any.on(
+inline fun <reified T : Event> Any.onEvent(
     plugin: Plugin,
     priority: EventPriority = EventPriority.NORMAL,
     ignoreCancelled: Boolean = false,
     crossinline action: Listener.(T) -> Unit
 ): ExtendedListener<T> {
     val subjects = SubjectRegistry.find(T::class.java)
-    Validate.isTrue(subjects.isNotEmpty(), "Event ${T::class.java.name} is not available")
+    if (subjects.isEmpty()) throw IllegalArgumentException("Event ${T::class.java.name} is not available")
     return plugin.on(priority, ignoreCancelled) {
         if (subjects.any { s -> this@on in s(it) }) {
             action(it)
@@ -182,7 +182,7 @@ inline fun <reified T : Event> Any.on(
     }
 }
 
-inline fun <reified T : Event> Any.expect(
+inline fun <reified T : Event> Any.expectEvent(
     crossinline predicate: Predicate<T> = { true },
     amount: Int = 1,
     timeout: Long = 0,
@@ -193,7 +193,7 @@ inline fun <reified T : Event> Any.expect(
     crossinline action: Listener.(T) -> Unit
 ): ExtendedListener<T> {
     val subjects = SubjectRegistry.find(T::class.java)
-    Validate.isTrue(subjects.isNotEmpty(), "Event ${T::class.java.name} is not available")
+    if (subjects.isEmpty()) throw IllegalArgumentException("Event ${T::class.java.name} is not available")
     return plugin.expect(predicate, amount, timeout, timeoutAction, priority, ignoreCancelled) {
         if (subjects.any { s -> this@expect in s(it) }) {
             action(it)

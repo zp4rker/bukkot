@@ -5,6 +5,3 @@
 target/
 build/
 .gradle/
-gradle/
-gradlew.bat
-gradlew
