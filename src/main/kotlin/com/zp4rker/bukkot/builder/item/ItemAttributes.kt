@@ -9,7 +9,6 @@ import org.bukkit.attribute.AttributeModifier
  * @author zp4rker
  */
 class ItemAttributes {
-
     val modifiers: Multimap<Attribute, AttributeModifier> = ArrayListMultimap.create()
 
     fun modify(attribute: Attribute) = ModNode(attribute)
@@ -25,5 +24,4 @@ class ItemAttributes {
         }
 
     }
-
 }

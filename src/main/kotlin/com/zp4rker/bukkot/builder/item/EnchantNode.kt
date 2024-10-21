@@ -6,7 +6,6 @@ import org.bukkit.enchantments.Enchantment
  * @author zp4rker
  */
 class EnchantNode {
-
     val set = mutableSetOf<EnchantContainer>()
 
     fun with(enchantment: Enchantment) = EnchantContainer(enchantment).also { set.add(it) }
@@ -22,5 +21,4 @@ class EnchantNode {
             this.level = level
         }
     }
-
 }
