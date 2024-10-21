@@ -16,7 +16,7 @@ class EnchantNode {
         }
     }
 
-    data class EnchantContainer internal constructor(val enchantment: Enchantment, var level: Int = 1) {
+    data class EnchantContainer(val enchantment: Enchantment, var level: Int = 1) {
         infix fun level(level: Int) {
             this.level = level
         }

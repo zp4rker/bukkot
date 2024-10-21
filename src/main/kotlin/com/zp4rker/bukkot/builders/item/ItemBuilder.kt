@@ -1,6 +1,8 @@
 package com.zp4rker.bukkot.builders.item
 
 import com.google.common.collect.ArrayListMultimap
+import com.zp4rker.bukkot.extensions.plain
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.ItemFlag
@@ -25,17 +27,17 @@ fun <T : ItemMeta> itemMeta(type: Material, data: T.() -> Unit) = Bukkit.getItem
     ?.apply(data)
     ?: throw IllegalArgumentException("Invalid ItemMeta for specified material.")
 
-var ItemMeta.fullLore: String?
-    get() = lore?.joinToString("\n")
+var ItemMeta.loreString: String?
+    get() = lore()?.joinToString("\n") { it.plain() }
     set(value) {
-        lore = value?.split("\n")
+        value?.let {
+            lore(it.split("\n").map { str -> Component.text(str) })
+        }
     }
 
-var ItemMeta.name: String?
-    get() = if (hasDisplayName()) displayName else null
-    set(value) {
-        setDisplayName(value)
-    }
+var ItemMeta.name: Component?
+    get() = if (hasDisplayName()) displayName() else null
+    set(value) = displayName(value)
 
 var ItemMeta.modelData: Int?
     get() = if (hasCustomModelData()) customModelData else null
