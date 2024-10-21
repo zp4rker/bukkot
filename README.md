@@ -19,6 +19,7 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 **Maven**
 
 ```xml
+
 <dependency>
     <groupId>com.zp4rker</groupId>
     <artifactId>bukkot</artifactId>

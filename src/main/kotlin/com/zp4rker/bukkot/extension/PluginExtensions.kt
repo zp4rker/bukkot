@@ -24,7 +24,12 @@ fun Plugin.runTask(delay: Long = 0, async: Boolean = false, task: BukkitRunnable
     }
 }
 
-fun Plugin.runTaskTimer(delay: Long = 0, period: Long = 20, async: Boolean = false, task: BukkitRunnable.() -> Unit): BukkitTask {
+fun Plugin.runTaskTimer(
+    delay: Long = 0,
+    period: Long = 20,
+    async: Boolean = false,
+    task: BukkitRunnable.() -> Unit
+): BukkitTask {
     return if (async) {
         LambdaRunnable(task).runTaskTimerAsynchronously(this, delay, period)
     } else {
@@ -32,7 +37,13 @@ fun Plugin.runTaskTimer(delay: Long = 0, period: Long = 20, async: Boolean = fal
     }
 }
 
-fun Plugin.repeatTask(repeat: IntProgression, delay: Long = 0, period: Long = 20, async: Boolean = false, task: BukkitRunnable.(Int) -> Unit): BukkitTask {
+fun Plugin.repeatTask(
+    repeat: IntProgression,
+    delay: Long = 0,
+    period: Long = 20,
+    async: Boolean = false,
+    task: BukkitRunnable.(Int) -> Unit
+): BukkitTask {
     val runnable = object : BukkitRunnable() {
         val i = repeat.iterator()
 

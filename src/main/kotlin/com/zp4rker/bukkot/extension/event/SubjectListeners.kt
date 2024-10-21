@@ -24,7 +24,6 @@ import org.bukkit.event.world.PortalCreateEvent
 import org.bukkit.event.world.StructureGrowEvent
 import org.bukkit.event.world.WorldEvent
 import org.bukkit.plugin.Plugin
-import java.lang.IllegalArgumentException
 
 /**
  * @author zp4rker
@@ -136,7 +135,12 @@ object SubjectRegistry {
         add(PrepareItemCraftEvent::class.java) { setOf(it.inventory.result) + it.inventory.matrix }
         add(PrepareItemEnchantEvent::class.java) { setOf(it.enchantBlock, it.enchanter, it.item) }
         add(PrepareSmithingEvent::class.java) { setOf(it.result) }
-        add(TradeSelectEvent::class.java) { setOf(it.merchant, it.inventory.selectedRecipe?.result) + it.inventory.selectedRecipe?.ingredients }
+        add(TradeSelectEvent::class.java) {
+            setOf(
+                it.merchant,
+                it.inventory.selectedRecipe?.result
+            ) + it.inventory.selectedRecipe?.ingredients
+        }
 
         /* Raid Events */
         /* not implementing for now */

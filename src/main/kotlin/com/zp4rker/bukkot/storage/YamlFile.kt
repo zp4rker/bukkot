@@ -8,7 +8,6 @@ import java.io.File
  * @author zp4rker
  */
 class YamlFile(plugin: JavaPlugin, name: String) : YamlConfiguration() {
-
     private val file: File
 
     init {

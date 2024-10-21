@@ -55,9 +55,11 @@ fun ItemMeta.flag(vararg flags: ItemFlag) = addItemFlags(*flags)
 fun ItemMeta.attributes(data: ItemAttributes.() -> Unit) {
     val attributes = ItemAttributes().apply(data)
     val mods = attributes.modifiers
-    attributeModifiers = ArrayListMultimap.create(if (attributeModifiers == null) ArrayListMultimap.create() else attributeModifiers!!).also {
-        it.putAll(mods)
-    }
+    attributeModifiers =
+        ArrayListMultimap.create(if (attributeModifiers == null) ArrayListMultimap.create() else attributeModifiers!!)
+            .also {
+                it.putAll(mods)
+            }
 }
 
 fun ItemMeta.enchant(unsafe: Boolean = false, data: EnchantNode.() -> Unit) {
