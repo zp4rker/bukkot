@@ -11,3 +11,4 @@ fun String.colorify(char: Char = '&') = ChatColor.translateAlternateColorCodes(c
 fun String.stripColors() = ChatColor.stripColor(this)
 
 fun String.component() = Component.text(this)
+fun String.minimessage() = MM.deserialize(this)

@@ -11,3 +11,4 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 fun Component.legacy() = LegacyComponentSerializer.legacySection().serialize(this)
 fun Component.json() = JSONComponentSerializer.json().serialize(this)
 fun Component.plain() = PlainTextComponentSerializer.plainText().serialize(this)
+fun Component.minimessage() = MM.serialize(this)
