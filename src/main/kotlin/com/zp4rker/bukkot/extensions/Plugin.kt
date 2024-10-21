@@ -1,4 +1,4 @@
-package com.zp4rker.bukkot.extension
+package com.zp4rker.bukkot.extensions
 
 import org.bukkit.plugin.Plugin
 import org.bukkit.scheduler.BukkitRunnable
@@ -7,7 +7,6 @@ import org.bukkit.scheduler.BukkitTask
 /**
  * @author zp4rker
  */
-
 fun Plugin.runTask(delay: Long = 0, async: Boolean = false, task: BukkitRunnable.() -> Unit): BukkitTask {
     return if (delay > 0) {
         if (async) {

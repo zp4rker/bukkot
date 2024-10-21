@@ -1,11 +1,10 @@
-package com.zp4rker.bukkot.extension
+package com.zp4rker.bukkot.extensions
 
 import java.util.concurrent.TimeUnit
 
 /**
  * @author zp4rker
  */
-
 fun TimeUnit.toTicks(d: Long): Long {
     return when (this) {
         TimeUnit.NANOSECONDS -> d / 50000000

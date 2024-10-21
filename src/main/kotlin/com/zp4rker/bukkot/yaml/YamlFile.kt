@@ -1,4 +1,4 @@
-package com.zp4rker.bukkot.storage
+package com.zp4rker.bukkot.yaml
 
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin

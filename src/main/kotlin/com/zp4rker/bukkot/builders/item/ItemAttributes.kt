@@ -1,4 +1,4 @@
-package com.zp4rker.bukkot.builder.item
+package com.zp4rker.bukkot.builders.item
 
 import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap

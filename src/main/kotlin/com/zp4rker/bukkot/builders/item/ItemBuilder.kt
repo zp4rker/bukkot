@@ -1,4 +1,4 @@
-package com.zp4rker.bukkot.builder.item
+package com.zp4rker.bukkot.builders.item
 
 import com.google.common.collect.ArrayListMultimap
 import org.bukkit.Bukkit
@@ -10,7 +10,6 @@ import org.bukkit.inventory.meta.ItemMeta
 /**
  * @author zp4rker
  */
-
 fun item(type: Material, data: ItemStack.() -> Unit) = ItemStack(type).apply(data)
 
 fun item(base: ItemStack, data: ItemStack.() -> Unit) = ItemStack(base).apply(data)

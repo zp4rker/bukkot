@@ -1,6 +1,6 @@
-package com.zp4rker.bukkot.extension.event
+package com.zp4rker.bukkot.extensions.event
 
-import com.zp4rker.bukkot.extension.PMANAGER
+import com.zp4rker.bukkot.extensions.PMANAGER
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.event.HandlerList
@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit
 /**
  * @author zp4rker
  */
-
 typealias Predicate<T> = (T) -> Boolean
 
 val scheduler: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()

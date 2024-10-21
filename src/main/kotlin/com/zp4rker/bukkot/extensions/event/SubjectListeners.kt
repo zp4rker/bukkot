@@ -1,4 +1,4 @@
-package com.zp4rker.bukkot.extension.event
+package com.zp4rker.bukkot.extensions.event
 
 import org.bukkit.block.BlockState
 import org.bukkit.event.Event
@@ -28,7 +28,6 @@ import org.bukkit.plugin.Plugin
 /**
  * @author zp4rker
  */
-
 object SubjectRegistry {
 
 
