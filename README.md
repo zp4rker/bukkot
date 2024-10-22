@@ -4,10 +4,10 @@
 
 ---
 
-![GitHub last commit](https://img.shields.io/github/last-commit/zp4rker/bukkot?style=flat)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/zp4rker/bukkot?label=current+version&style=flat)
-![GitHub](https://img.shields.io/github/license/zp4rker/bukkot?style=flat)
-![Lines of code](https://img.shields.io/tokei/lines/github/zp4rker/bukkot?style=flat)
+![Last commit](https://img.shields.io/github/last-commit/zp4rker/bukkot?style=flat)
+![Latest tag](https://img.shields.io/github/v/tag/zp4rker/bukkot?label=current+version&style=flat)
+![License](https://img.shields.io/github/license/zp4rker/bukkot?style=flat)
+![Lines of code](https://img.shields.io/endpoint?url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2Fzp4rker%2Fbukkot%2Fbadge)
 [![Discord Badge](https://discordapp.com/api/guilds/647312158832721934/widget.png)](https://zp4rker.com/discord)
 
 Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin.
