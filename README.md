@@ -15,8 +15,8 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 </div>
 
 # Download
-
-**Maven**
+![Maven Central Last Update](https://img.shields.io/maven-central/last-update/com.zp4rker/bukkot) ![Maven Central Version](https://img.shields.io/maven-central/v/com.zp4rker/bukkot)
+## Maven
 
 ```xml
 <dependency>
@@ -26,7 +26,7 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 </dependency>
 ```
 
-**Gradle**
+## Gradle
 
 ```groovy
 compile "com.zp4rker:bukkot:2.0.0-k2.0.21"
