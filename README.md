@@ -19,18 +19,17 @@ Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added featur
 **Maven**
 
 ```xml
-
 <dependency>
     <groupId>com.zp4rker</groupId>
     <artifactId>bukkot</artifactId>
-    <version>1.1.0-k1.5.0</version>
+    <version>2.0.0-k2.0.21</version>
 </dependency>
 ```
 
 **Gradle**
 
 ```groovy
-compile "com.zp4rker:bukkot:1.1.0-k1.5.0"
+compile "com.zp4rker:bukkot:2.0.0-k2.0.21"
 ```
 
 # Features
