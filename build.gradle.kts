@@ -3,13 +3,16 @@ plugins {
     kotlin("plugin.serialization") version "2.0.21"
 
     id("com.gradleup.shadow") version "8.3.3"
+
+    id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "com.zp4rker"
 version = "2.0.0-k2.0.21"
-description = "Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin."
+description = "Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin"
 
 val mcVersion = "1.21.1"
+project.ext["mcVersion"] = mcVersion
 
 repositories {
     mavenCentral()
@@ -35,6 +38,7 @@ tasks {
 
     shadowJar {
         archiveFileName = filename
+        relocate("org.bstats", "com.zp4rker.bukkot.bstats")
     }
 
     processResources {
@@ -49,5 +53,12 @@ tasks {
 
     build {
         dependsOn(shadowJar)
+    }
+
+    runServer {
+        minecraftVersion(mcVersion)
+        subprojects.forEach {
+            pluginJars(it.tasks.jar.map { jar -> jar.archiveFile })
+        }
     }
 }
