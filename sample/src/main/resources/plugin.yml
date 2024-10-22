@@ -1,0 +1,9 @@
+main: com.zp4rker.bukkot.sample.SamplePlugin
+api-version: ${mcVersion}
+depend:
+  - Bukkot
+
+name: Bukkot-Sample
+version: ${version}
+description: ${description}
+author: zp4rker
