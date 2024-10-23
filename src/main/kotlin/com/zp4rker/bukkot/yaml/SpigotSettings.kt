@@ -4,7 +4,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 /**
- * @author zp4rker
+ * [YamlConfiguration] instance for the spigot settings (spigot.yml)
  */
 object SpigotSettings : YamlConfiguration() {
     init {

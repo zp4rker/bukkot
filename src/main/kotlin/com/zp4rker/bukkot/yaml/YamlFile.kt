@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 /**
- * @author zp4rker
+ * Access [YamlConfiguration] for any file located in plugin's data folder
  */
 class YamlFile(private val plugin: JavaPlugin, name: String) : YamlConfiguration() {
     private val file: File
@@ -23,11 +23,22 @@ class YamlFile(private val plugin: JavaPlugin, name: String) : YamlConfiguration
         }
     }
 
+    /**
+     * Saves the config to file
+     */
     fun save() = save(file)
 
+    /**
+     * Reloads the config from file
+     */
     fun reload() = load(file)
 
-    fun writeDefaultFile(override: Boolean = false) {
-        plugin.saveResource(file.name, override)
+    /**
+     * Saves the content from the associated resource file to actual file
+     *
+     * @param overwrite whether to overwrite the file or not
+     */
+    fun writeDefaultFile(overwrite: Boolean = false) {
+        plugin.saveResource(file.name, overwrite)
     }
 }

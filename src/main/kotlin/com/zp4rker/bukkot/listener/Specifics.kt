@@ -10,7 +10,11 @@ import org.bukkit.event.player.PlayerEvent
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
- * @author zp4rker
+ * Registers continuous listener where this entity is the subject
+ *
+ * No need to check `event.entity = this`
+ *
+ * @see org.bukkit.plugin.Plugin.on
  */
 inline fun <reified T : EntityEvent> Entity.on(
     plugin: JavaPlugin,
@@ -25,6 +29,11 @@ inline fun <reified T : EntityEvent> Entity.on(
     }, priority, ignoreCancelled, action)
 }
 
+/**
+ * Registers limited listener where this entity is the subject
+ *
+ * @see org.bukkit.plugin.Plugin.expect
+ */
 inline fun <reified T : EntityEvent> Entity.expect(
     plugin: JavaPlugin,
     crossinline predicate: Predicate<T> = { true },
@@ -41,6 +50,13 @@ inline fun <reified T : EntityEvent> Entity.expect(
     }, amount, timeout, timeoutAction, priority, ignoreCancelled, action)
 }
 
+/**
+ * Registers continuous listener where this player is the subject
+ *
+ * No need to check `event.player = this`
+ *
+ * @see org.bukkit.plugin.Plugin.on
+ */
 inline fun <reified T : PlayerEvent> Player.on(
     plugin: JavaPlugin,
     crossinline predicate: Predicate<T> = { true },
@@ -54,6 +70,11 @@ inline fun <reified T : PlayerEvent> Player.on(
     }, priority, ignoreCancelled, action)
 }
 
+/**
+ * Registers limited listener where this player is the subject
+ *
+ * @see org.bukkit.plugin.Plugin.expect
+ */
 inline fun <reified T : PlayerEvent> Player.expect(
     plugin: JavaPlugin,
     crossinline predicate: Predicate<T> = { true },
@@ -70,6 +91,13 @@ inline fun <reified T : PlayerEvent> Player.expect(
     }, amount, timeout, timeoutAction, priority, ignoreCancelled, action)
 }
 
+/**
+ * Registers continuous listener where this block is the subject
+ *
+ * No need to check `event.block = this`
+ *
+ * @see org.bukkit.plugin.Plugin.on
+ */
 inline fun <reified T : BlockEvent> Block.on(
     plugin: JavaPlugin,
     crossinline predicate: Predicate<T> = { true },
@@ -83,6 +111,11 @@ inline fun <reified T : BlockEvent> Block.on(
     }, priority, ignoreCancelled, action)
 }
 
+/**
+ * Registers limited listener where this block is the subject
+ *
+ * @see org.bukkit.plugin.Plugin.expect
+ */
 inline fun <reified T : BlockEvent> Block.expect(
     plugin: JavaPlugin,
     crossinline predicate: Predicate<T> = { true },

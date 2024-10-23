@@ -5,7 +5,14 @@ import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.scheduler.BukkitTask
 
 /**
- * @author zp4rker
+ * Run a regular [BukkitRunnable]
+ *
+ * @param delay ticks before task runs. Set to 0 to run immediately
+ * @param async whether or not to run in async
+ * @param task the task to run in the [BukkitRunnable]
+ *
+ * @see BukkitRunnable.runTask
+ * @see BukkitRunnable.runTaskLater
  */
 fun Plugin.runTask(delay: Long = 0, async: Boolean = false, task: BukkitRunnable.() -> Unit): BukkitTask {
     return if (delay > 0) {
@@ -23,6 +30,14 @@ fun Plugin.runTask(delay: Long = 0, async: Boolean = false, task: BukkitRunnable
     }
 }
 
+/**
+ * Run a timer [BukkitRunnable]
+ *
+ * @param period ticks between runs
+ *
+ * @see runTask
+ * @see BukkitRunnable.runTaskTimer
+ */
 fun Plugin.runTaskTimer(
     delay: Long = 0,
     period: Long = 20,
@@ -36,6 +51,15 @@ fun Plugin.runTaskTimer(
     }
 }
 
+/**
+ * Run a timer [BukkitRunnable] limited amount of times
+ *
+ * @param repeat amount of times to repeat task. Specified as range (useful for using within task)
+ * @param task the task to run in the [BukkitRunnable]. Has access to repeat number
+ *
+ * @see IntProgression
+ * @see runTaskTimer
+ */
 fun Plugin.repeatTask(
     repeat: IntProgression,
     delay: Long = 0,
@@ -59,6 +83,9 @@ fun Plugin.repeatTask(
     }
 }
 
+/**
+ * Class to simplify [BukkitRunnable] lambdas
+ */
 internal class LambdaRunnable(private val task: BukkitRunnable.() -> Unit) : BukkitRunnable() {
     override fun run() {
         task()

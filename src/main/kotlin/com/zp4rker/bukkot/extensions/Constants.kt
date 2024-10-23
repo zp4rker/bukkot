@@ -6,9 +6,12 @@ import org.bukkit.Server
 import org.bukkit.plugin.PluginManager
 
 /**
- * @author zp4rker
+ * The server plugin manager
  */
 object PMANAGER : PluginManager by Bukkit.getPluginManager()
 object SERVER : Server by Bukkit.getServer()
 
+/**
+ * Instance of [MiniMessage]
+ */
 val MM = MiniMessage.miniMessage()

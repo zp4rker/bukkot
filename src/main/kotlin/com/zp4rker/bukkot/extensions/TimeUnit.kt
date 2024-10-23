@@ -3,7 +3,7 @@ package com.zp4rker.bukkot.extensions
 import java.util.concurrent.TimeUnit
 
 /**
- * @author zp4rker
+ * Convert time units to ticks
  */
 fun TimeUnit.toTicks(d: Long): Long {
     return when (this) {
@@ -23,6 +23,9 @@ fun TimeUnit.toTicks(d: Long): Long {
     }
 }
 
+/**
+ * [TimeUnit] for ticks
+ */
 object TickTimeUnit {
     fun toNanos(ticks: Long) = ticks * 50000000
     fun toMicros(ticks: Long) = ticks * 50000

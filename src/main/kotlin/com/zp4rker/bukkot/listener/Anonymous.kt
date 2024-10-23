@@ -8,16 +8,33 @@ import org.bukkit.plugin.EventExecutor
 import org.bukkit.plugin.Plugin
 
 /**
- * @author zp4rker
+ * Interface for anonymous listeners
+ * @see listener
  */
 interface AnonymousListener<T : Event> : Listener {
     fun onEvent(event: T)
 }
 
+/**
+ * Creates an instance of [AnonymousListener]
+ *
+ * @param action the function to be executed in the listener
+ * @return an instance of [AnonymousListener]
+ * @see register
+ */
 inline fun <T : Event> listener(crossinline action: AnonymousListener<T>.(T) -> Unit) = object : AnonymousListener<T> {
     override fun onEvent(event: T) = action(event)
 }
 
+/**
+ * Registers an [AnonymousListener]. Parameters derived from [org.bukkit.event.EventHandler]
+ *
+ * @param plugin the plugin registering the listener
+ * @param priority the listener priority
+ * @param ignoreCancelled whether the listener should still trigger for cancelled events
+ *
+ * @see [com.zp4rker.bukkot.extensions.unregister]
+ */
 inline fun <reified T : Event> AnonymousListener<T>.register(
     plugin: Plugin,
     priority: EventPriority = EventPriority.NORMAL,

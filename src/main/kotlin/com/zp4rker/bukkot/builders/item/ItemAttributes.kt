@@ -6,7 +6,7 @@ import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 
 /**
- * @author zp4rker
+ * Attributes for [org.bukkit.inventory.ItemStack]
  */
 class ItemAttributes {
     val modifiers: Multimap<Attribute, AttributeModifier> = ArrayListMultimap.create()

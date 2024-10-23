@@ -3,7 +3,7 @@ package com.zp4rker.bukkot.builders.item
 import org.bukkit.enchantments.Enchantment
 
 /**
- * @author zp4rker
+ * Node for [org.bukkit.inventory.ItemStack] enchantments
  */
 class EnchantNode {
     val set = mutableSetOf<EnchantContainer>()

@@ -5,12 +5,17 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 /**
- * @author zp4rker
+ * Registers listener by plugin
+ *
+ * @param plugin the plugin to register the listener
  */
 fun Listener.register(plugin: JavaPlugin) {
     PMANAGER.registerEvents(this, plugin)
 }
 
+/**
+ * Unregisters a listener
+ */
 fun Listener.unregister() {
     HandlerList.unregisterAll(this)
 }

@@ -8,11 +8,17 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
-/**
- * @author zp4rker
- */
 typealias Predicate<T> = (T) -> Boolean
 
+/**
+ * Register a continuous listener
+ *
+ * @param T the event to listen to
+ * @param predicate function to determine pre-requisites for listener to invoke action
+ * @param priority the listener priority
+ * @param ignoreCancelled whether the listener should still trigger for cancelled events
+ * @param action the function to be executed in the listener
+ */
 inline fun <reified T : Event> Plugin.on(
     crossinline predicate: Predicate<T> = { true },
     priority: EventPriority = EventPriority.NORMAL,
@@ -26,6 +32,16 @@ inline fun <reified T : Event> Plugin.on(
 
 val scheduler: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
 
+/**
+ * Register a limited listener
+ *
+ * @param T the event to listen to
+ * @param amount amount of times this listener should listen for event
+ * @param timeout milliseconds before listener times out even if [amount] has not been reached. Set to 0 for no timeout
+ * @param timeoutAction the function to run when the listener times out
+ *
+ * @see on
+ */
 inline fun <reified T : Event> Plugin.expect(
     crossinline predicate: Predicate<T> = { true },
     amount: Int = 1,
