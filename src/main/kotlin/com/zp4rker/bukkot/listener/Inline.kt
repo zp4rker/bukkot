@@ -1,6 +1,9 @@
 package com.zp4rker.bukkot.listener
 
+import com.zp4rker.bukkot.api.BlockingFunction
 import com.zp4rker.bukkot.extensions.unregister
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.runBlocking
 import org.bukkit.event.Event
 import org.bukkit.event.EventPriority
 import org.bukkit.plugin.Plugin
@@ -71,5 +74,52 @@ inline fun <reified T : Event> Plugin.expect(
     }
 
     listener.register(this, priority, ignoreCancelled)
+}
+
+/**
+ * Register a limited listener which blocks the current thread
+ *
+ * Blocks until all calls are made or the listener times out
+ *
+ * @param T the event to listen to
+ *
+ * @see expect
+ */
+@BlockingFunction
+inline fun <reified T : Event> Plugin.expectBlocking(
+    crossinline predicate: Predicate<T> = { true },
+    amount: Int = 1,
+    timeout: Long = 0,
+    crossinline timeoutAction: () -> Unit = {},
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: AnonymousListener<T>.(T) -> Unit
+) {
+    val channel = Channel<Boolean?>(1)
+
+    var calls = 0
+    val listener = listener {
+        if (predicate(it)) {
+            action(it)
+            if (++calls >= amount) {
+                unregister()
+                runBlocking { channel.send(null) }
+            }
+        }
+    }
+
+    if (timeout > 0) {
+        scheduler.schedule({
+            if (calls < amount) {
+                timeoutAction()
+                listener.unregister()
+                runBlocking { channel.send(null) }
+            }
+        }, timeout, TimeUnit.MILLISECONDS)
+    }
+
+    listener.register(this, priority, ignoreCancelled)
+
+    runBlocking { channel.receive() }
 }
 

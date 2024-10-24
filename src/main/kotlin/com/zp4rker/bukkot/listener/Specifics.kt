@@ -1,5 +1,6 @@
 package com.zp4rker.bukkot.listener
 
+import com.zp4rker.bukkot.api.BlockingFunction
 import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
@@ -51,6 +52,30 @@ inline fun <reified T : EntityEvent> Entity.expect(
 }
 
 /**
+ * Registers limited listener which blocks the current thread where this entity is the subject
+ *
+ * Blocks until all calls are made or the listener times out
+ *
+ * @see org.bukkit.plugin.Plugin.expectBlocking
+ */
+@BlockingFunction
+inline fun <reified T : EntityEvent> Entity.expectBlocking(
+    plugin: JavaPlugin,
+    crossinline predicate: Predicate<T> = { true },
+    amount: Int = 1,
+    timeout: Long = 0,
+    crossinline timeoutAction: () -> Unit = {},
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: AnonymousListener<T>.(T) -> Unit
+) {
+    plugin.expectBlocking<T>({
+        if (it.entity.uniqueId == this.uniqueId) predicate(it)
+        else false
+    }, amount, timeout, timeoutAction, priority, ignoreCancelled, action)
+}
+
+/**
  * Registers continuous listener where this player is the subject
  *
  * No need to check `event.player = this`
@@ -92,6 +117,30 @@ inline fun <reified T : PlayerEvent> Player.expect(
 }
 
 /**
+ * Registers limited listener which blocks the current thread where this player is the subject
+ *
+ * Blocks until all calls are made or the listener times out
+ *
+ * @see org.bukkit.plugin.Plugin.expectBlocking
+ */
+@BlockingFunction
+inline fun <reified T : PlayerEvent> Player.expectBlocking(
+    plugin: JavaPlugin,
+    crossinline predicate: Predicate<T> = { true },
+    amount: Int = 1,
+    timeout: Long = 0,
+    crossinline timeoutAction: () -> Unit = {},
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: AnonymousListener<T>.(T) -> Unit
+) {
+    plugin.expectBlocking<T>({
+        if (it.player.uniqueId == this.uniqueId) predicate(it)
+        else false
+    }, amount, timeout, timeoutAction, priority, ignoreCancelled, action)
+}
+
+/**
  * Registers continuous listener where this block is the subject
  *
  * No need to check `event.block = this`
@@ -127,6 +176,30 @@ inline fun <reified T : BlockEvent> Block.expect(
     crossinline action: AnonymousListener<T>.(T) -> Unit
 ) {
     plugin.expect<T>({
+        if (it.block.location == this.location && it.block.blockData.asString == this.blockData.asString) predicate(it)
+        else false
+    }, amount, timeout, timeoutAction, priority, ignoreCancelled, action)
+}
+
+/**
+ * Registers limited listener which blocks the current thread where this block is the subject
+ *
+ * Blocks until all calls are made or the listener times out
+ *
+ * @see org.bukkit.plugin.Plugin.expectBlocking
+ */
+@BlockingFunction
+inline fun <reified T : BlockEvent> Block.expectBlocking(
+    plugin: JavaPlugin,
+    crossinline predicate: Predicate<T> = { true },
+    amount: Int = 1,
+    timeout: Long = 0,
+    crossinline timeoutAction: () -> Unit = {},
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    crossinline action: AnonymousListener<T>.(T) -> Unit
+) {
+    plugin.expectBlocking<T>({
         if (it.block.location == this.location && it.block.blockData.asString == this.blockData.asString) predicate(it)
         else false
     }, amount, timeout, timeoutAction, priority, ignoreCancelled, action)
