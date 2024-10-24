@@ -1,4 +1,5 @@
 @file:Suppress("deprecation")
+
 package com.zp4rker.bukkot.extensions
 
 import net.kyori.adventure.text.Component

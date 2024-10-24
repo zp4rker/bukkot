@@ -62,9 +62,11 @@ class SamplePlugin : JavaPlugin() {
         // Inline listener - expectBlocking #2
         this.runTask(async = true) {
             logger.info("This is part 1 of 3")
-            this@SamplePlugin.expectBlocking<ServerCommandEvent>(timeout = TimeUnit.SECONDS.toMillis(10), timeoutAction = {
-                logger.info("This is part 2 of 3 - but as a timeout")
-            }) {
+            this@SamplePlugin.expectBlocking<ServerCommandEvent>(
+                timeout = TimeUnit.SECONDS.toMillis(10),
+                timeoutAction = {
+                    logger.info("This is part 2 of 3 - but as a timeout")
+                }) {
                 logger.info("This is part 2 of 3")
             }
             logger.info("This is part 3 of 3")
