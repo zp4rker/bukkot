@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "com.zp4rker"
-version = "2.0.0-k2.0.21"
+version = "2.1.0-k2.0.21"
 description = "Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin"
 
 val mcVersion = "1.21.1"
