@@ -118,8 +118,8 @@ publishing {
                         val snapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots"
                         url = uri(if (project.version.toString().endsWith("-SNAPSHOT")) snapshotsUrl else stagingUrl)
                         credentials {
-                            username = System.getenv("OSSRH_USERNAME")
-                            password = System.getenv("OSSRH_PASSWORD")
+                            username = project.property("ossrhUsername").toString()
+                            password = project.property("ossrhPassword").toString()
                         }
                     }
                 }
