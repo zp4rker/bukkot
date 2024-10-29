@@ -19,7 +19,7 @@ typealias Predicate<T> = (T) -> Boolean
  * @param T the event to listen to
  * @param predicate function to determine pre-requisites for listener to invoke action
  * @param priority the listener priority
- * @param ignoreCancelled whether the listener should still trigger for cancelled events
+ * @param ignoreCancelled whether the listener should ignore cancelled events
  * @param action the function to be executed in the listener
  */
 inline fun <reified T : Event> Plugin.on(

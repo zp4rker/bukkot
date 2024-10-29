@@ -34,7 +34,7 @@ inline fun <T : Event> listener(crossinline predicate: Predicate<T> = { true }, 
  *
  * @param plugin the plugin registering the listener
  * @param priority the listener priority
- * @param ignoreCancelled whether the listener should still trigger for cancelled events
+ * @param ignoreCancelled whether the listener should ignore cancelled events
  *
  * @see [com.zp4rker.bukkot.extensions.unregister]
  */
