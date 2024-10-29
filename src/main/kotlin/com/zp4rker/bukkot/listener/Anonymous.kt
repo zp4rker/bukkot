@@ -18,12 +18,15 @@ interface AnonymousListener<T : Event> : Listener {
 /**
  * Creates an instance of [AnonymousListener]
  *
+ * @param predicate function to determine pre-requisites for listener to invoke action
  * @param action the function to be executed in the listener
  * @return an instance of [AnonymousListener]
  * @see register
  */
-inline fun <T : Event> listener(crossinline action: AnonymousListener<T>.(T) -> Unit) = object : AnonymousListener<T> {
-    override fun onEvent(event: T) = action(event)
+inline fun <T : Event> listener(crossinline predicate: Predicate<T> = { true }, crossinline action: AnonymousListener<T>.(T) -> Unit) = object : AnonymousListener<T> {
+    override fun onEvent(event: T) {
+        if (predicate(event)) action(event)
+    }
 }
 
 /**

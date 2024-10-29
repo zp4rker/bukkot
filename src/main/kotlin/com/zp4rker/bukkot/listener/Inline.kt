@@ -28,8 +28,8 @@ inline fun <reified T : Event> Plugin.on(
     ignoreCancelled: Boolean = false,
     crossinline action: AnonymousListener<T>.(T) -> Unit
 ) {
-    listener {
-        if (predicate(it)) action(it)
+    listener(predicate) {
+        action(it)
     }.register(this, priority, ignoreCancelled)
 }
 
@@ -55,12 +55,10 @@ inline fun <reified T : Event> Plugin.expect(
     crossinline action: AnonymousListener<T>.(T) -> Unit
 ) {
     var calls = 0
-    val listener = listener {
-        if (predicate(it)) {
-            action(it)
-            if (++calls >= amount) {
-                unregister()
-            }
+    val listener = listener(predicate) {
+        action(it)
+        if (++calls >= amount) {
+            unregister()
         }
     }
 
@@ -98,13 +96,11 @@ inline fun <reified T : Event> Plugin.expectBlocking(
     val channel = Channel<Boolean?>(1)
 
     var calls = 0
-    val listener = listener {
-        if (predicate(it)) {
-            action(it)
-            if (++calls >= amount) {
-                unregister()
-                runBlocking { channel.send(null) }
-            }
+    val listener = listener(predicate) {
+        action(it)
+        if (++calls >= amount) {
+            unregister()
+            runBlocking { channel.send(null) }
         }
     }
 
