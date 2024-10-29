@@ -63,7 +63,8 @@ tasks {
 
     create<Jar>("javadocJar") {
         archiveClassifier = "javadoc"
-        from(javadoc)
+        dependsOn(dokkaJavadoc)
+        from(dokkaJavadoc.flatMap { it.outputDirectory })
     }
     create<Jar>("sourcesJar") {
         archiveClassifier = "sources"
