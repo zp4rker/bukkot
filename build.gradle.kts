@@ -25,11 +25,11 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    compileOnly(kotlin("stdlib"))
+    compileOnly(kotlin("reflect"))
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
 
-    implementation("io.papermc.paper:paper-api:$mcVersion-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:$mcVersion-R0.1-SNAPSHOT")
 
     implementation("org.bstats:bstats-bukkit:1.7")
 }
@@ -42,9 +42,6 @@ tasks {
     shadowJar {
         archiveClassifier = ""
         relocate("org.bstats", "com.zp4rker.bukkot.bstats")
-        dependencies {
-            include { it.moduleGroup == "org.bstats" }
-        }
     }
 
     processResources {
