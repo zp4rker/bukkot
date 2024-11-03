@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "com.zp4rker"
-version = "2.1.0-k2.0.21"
+version = "2.1.1-k2.0.21"
 description = "Kotlin meets Bukkit. Kotlin packaged into a plugin, as well as some added features using Kotlin"
 
 val mcVersion = "1.21.1"
@@ -25,9 +25,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly(kotlin("stdlib"))
-    compileOnly(kotlin("reflect"))
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    api(kotlin("stdlib"))
+    api(kotlin("reflect"))
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
 
     compileOnly("io.papermc.paper:paper-api:$mcVersion-R0.1-SNAPSHOT")
 
@@ -42,6 +42,9 @@ tasks {
     shadowJar {
         archiveClassifier = ""
         relocate("org.bstats", "com.zp4rker.bukkot.bstats")
+        dependencies {
+            include { it.moduleGroup == "org.bstats"}
+        }
     }
 
     processResources {
